@@ -1,6 +1,6 @@
 {
   "name": "monaco-js-linter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple JS Linter for the Monaco Editor.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

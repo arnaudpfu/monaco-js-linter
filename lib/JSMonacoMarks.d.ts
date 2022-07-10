@@ -26,9 +26,9 @@ interface IMarkerData {
 }
 export declare class JSMonacoMarks {
     protected js: string;
-    protected ruleset?: LintOptions;
+    protected options?: LintOptions;
     protected linterResponse: LintData;
-    constructor(js: string, ruleset?: LintOptions);
+    constructor(js: string, options?: LintOptions);
     lint(): LintData;
     getEditorMarks(monaco: Monaco): IMarkerData[];
     getLinterResponse(): LintData;
