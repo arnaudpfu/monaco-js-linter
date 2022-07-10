@@ -1,37 +1,10 @@
-import monaco, { MarkerSeverity, MarkerTag, Uri } from 'monaco-editor';
+import monaco, { editor } from 'monaco-editor';
 import { JSHINT } from 'jshint/dist/jshint';
 import { LintData, LintOptions } from 'jshint';
 
 type Monaco = typeof monaco;
 
 type MarkerSeveritySlug = 'Info' | 'Warning' | 'Error';
-
-interface IRelatedInformation {
-    resource: Uri;
-    message: string;
-    startLineNumber: number;
-    startColumn: number;
-    endLineNumber: number;
-    endColumn: number;
-}
-
-interface IMarkerData {
-    code?:
-        | string
-        | {
-              value: string;
-              target: Uri;
-          };
-    severity: MarkerSeverity; // Hint | Info | Warning | Error
-    message: string;
-    source?: string;
-    startLineNumber: number;
-    startColumn: number;
-    endLineNumber: number;
-    endColumn: number;
-    relatedInformation?: IRelatedInformation[];
-    tags?: MarkerTag[];
-}
 
 export class JSMonacoMarks {
     protected js: string;
@@ -53,8 +26,8 @@ export class JSMonacoMarks {
         return data;
     }
 
-    public getEditorMarks(monaco: Monaco): IMarkerData[] {
-        let marks: IMarkerData[] = [];
+    public getEditorMarks(monaco: Monaco): editor.IMarkerData[] {
+        let marks: editor.IMarkerData[] = [];
         const errors = this.linterResponse.errors;
         if (errors) {
             marks = errors.map((issue) => {
