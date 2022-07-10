@@ -7,19 +7,19 @@ type Monaco = typeof monaco;
 export class JSMonacoLinter {
     protected editor: editor.IStandaloneCodeEditor;
     protected monaco: Monaco;
-    protected ruleset?: LintOptions;
+    protected options?: LintOptions;
 
-    constructor(editor: editor.IStandaloneCodeEditor, monaco: Monaco, ruleset?: LintOptions) {
+    constructor(editor: editor.IStandaloneCodeEditor, monaco: Monaco, options?: LintOptions) {
         this.editor = editor;
         this.monaco = monaco;
-        this.ruleset = ruleset;
+        this.options = options;
     }
 
     public lint() {
         const code = this.editor.getValue();
         const languageID = this.editor.getModel()?.getLanguageId();
         if (languageID === 'javascript') {
-            const monacoLinter = new JSMonacoMarks(code, this.ruleset);
+            const monacoLinter = new JSMonacoMarks(code, this.options);
             const issues = monacoLinter.getEditorMarks(this.monaco);
             const model = this.editor.getModel();
             if (model === null) {

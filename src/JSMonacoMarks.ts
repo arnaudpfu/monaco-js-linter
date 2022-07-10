@@ -35,17 +35,17 @@ interface IMarkerData {
 
 export class JSMonacoMarks {
     protected js: string;
-    protected ruleset?: LintOptions;
+    protected options?: LintOptions;
     protected linterResponse: LintData;
 
-    constructor(js: string, ruleset?: LintOptions) {
+    constructor(js: string, options?: LintOptions) {
         this.js = js;
-        this.ruleset = ruleset;
+        this.options = options;
         this.linterResponse = this.lint();
     }
 
     public lint(): LintData {
-        JSHINT(this.js);
+        JSHINT(this.js, this.options);
         const data = JSHINT.data();
         if (!data) {
             throw new Error('Data is not defined.');
